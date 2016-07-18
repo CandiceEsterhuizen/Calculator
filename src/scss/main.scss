@@ -1,0 +1,19 @@
+// Screen
+// ======
+@import "reset";
+@import "grids";
+@import "font-awesome";
+
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+//$font-openSans: 'Open Sans', sans-serif;
+
+html {
+    font-size: 62.5%;
+}
+
+h1{
+    color:red;
+    font-size: 5.4rem;
+    text-align: center;
+    padding:40px 0;
+}
