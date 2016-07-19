@@ -3,35 +3,48 @@
     <head>
         <title>Start</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
-<!--        <script type="text/javascript" src="js/main.js" defer></script>-->
-        <script type="text/javascript" src="../public/js/main.min.js"></script>
+        <script type="text/javascript" src="js/main.js" defer></script>
     </head>
-    
+
     <body>
+        <div class="grid">
+            <header>Calculator</header>
+
+            <section id="calc-future-value">
+                <label class="interest-rate">Effective interest rate</label> 
+                <input type="number" placeholder="10%" id="interest-rate">
 
 
-        <div class="wrapper grid">
+
+                <label class="period">Period</label>
+                <input type="number" placeholder="5" id="period">
+
+
+
+                <label class="initial-investment">Initial value</label>
+                <input type="tel" placeholder="R100.00" id="init-investment">
+
+
+
+                <input class="btn-calculate" type="submit" value="Calculate">
+                <div class="future-value" id="output"></div>
+            </section>
+
+            <section id="calc-interest-rate">
+                <label class="initial-investment">Initial value</label>
+                <input type="tel" placeholder="R100.00" id="init-investment">
+
+
+                <label class="period">Period</label>
+                <input type="number" placeholder="5" id="period">
+
+                <label class="future-value">Future Value</label>
+                <input type="tel" placeholder="R161.05" id="future-value">
+
+                <input class="btn-calculate" type="submit" value="Calculate">
+                <div id="interest-rate-output"></div>
+            </section>
             
-            <div class="input-single-invest">
-                <div class="future-value">
-                    <label class="init-value">Effective interest rate</label>
-                    <input type="number" placeholder="10%" id="interest-rate">
-                    <label class="period">Period</label>
-                    <input type="number" placeholder="5" id="period">
-                    <label class="initial-value">Initial value</label>
-                    <input type="tel" placeholder="R100.00" id="init-investment">
-                    <input type="submit" onclick="singleInvestments()" value="Calculate">
-                </div>
-                <div id="output"></div>
-            </div>
         </div>
-
-        <section class="grid">
-            <h1>Getting Started!</h1>
-        </section>
-        <section>
-            <input type="text" placeholder="Investment value:" id="investment">
-        </section>
-
     </body>
 </html>

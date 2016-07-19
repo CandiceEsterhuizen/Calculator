@@ -1,5 +1,12 @@
 function tempFunction(event){
-    console.log('Input was clicked: '+event.target.getAttribute('placeholder'));
+    
+}
+
+function addFormListeners(){
+    var interestRate = document.getElementById("interest-rate");
+    var period = document.getElementById("period");
+    var initialInvestment = document.getElementById("init-investment");
+    var futureValue = document.getElementById("future-value");
 }
 
 window.onload = function() {
@@ -11,11 +18,7 @@ window.onload = function() {
         console.log("interestRate " + interestRate + " period " + period + " initialInvestment " + initialInvestment);*/
 
     
-    console.log('Hello World!');
     
-    var investInput = document.getElementById("investment");
-    
-    
-    investInput.addEventListener("click", tempFunction);
+    addFormListeners();
 };
 
