@@ -3,11 +3,26 @@
     <head>
         <title>Start</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script type="text/javascript" src="js/main.js" defer></script>
+<!--        <script type="text/javascript" src="js/main.js" defer></script>-->
+        <script type="text/javascript" src="../public/js/main.min.js"></script>
     </head>
+    
     <body>
-        <section class="grid">
-            <h1>Getting Started!</h1>
-        </section>
+
+        <div class="wrapper grid">
+            
+            <div class="input-single-invest">
+                <div class="future-value">
+                    <label class="init-value">Effective interest rate</label>
+                    <input type="number" placeholder="10%" id="interest-rate">
+                    <label class="period">Period</label>
+                    <input type="number" placeholder="5" id="period">
+                    <label class="initial-value">Initial value</label>
+                    <input type="tel" placeholder="R100.00" id="init-investment">
+                    <input type="submit" onclick="singleInvestments()" value="Calculate">
+                </div>
+                <div id="output"></div>
+            </div>
+        </div>
     </body>
 </html>
