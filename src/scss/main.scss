@@ -7,6 +7,136 @@
 //@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
 //$font-openSans: 'Open Sans', sans-serif;
 
+.grid {
+    position: relative;
+    .interest-rate-container-fv,
+    .initial-investment-container-ir,
+    .interest-rate-container-ii
+    {
+        @include pre(0 of 4);
+        @include span(1 of 4);
+    }
+    .period-container-fv,
+    .period-container-ir,
+    .period-container-ii
+    {
+        @include pre(.2 of 4);
+        @include span(1 of 4);
+    }
+    .initial-investment-container-fv,
+    .future-value-container-ir,
+    .future-value-container-ii
+    {
+        @include pre(.2 of 4);
+        @include span(1 of 4);
+    }
+    .action
+    {
+        @include pre(1.5 of 4);
+        @include span(1 of 4);
+    }
+
+    @include mappy-bp(med) 
+    {
+        .interest-rate-container-fv,
+        .initial-investment-container-ir,
+        .interest-rate-container-ii
+        {
+            @include pre(.3 of 6);
+            @include span(1 of 6);
+            @include post(0 of 6);
+        }
+        .period-container-fv,
+        .period-container-ir,
+        .period-container-ii
+        {
+            @include pre(1 of 6);
+            @include span(1 of 6);
+            @include post(0 of 6);
+        }
+        .initial-investment-container-fv,
+        .future-value-container-ir,
+        .future-value-container-ii
+        {
+            @include pre(1 of 6);
+            @include span(1 of 6);
+            @include post(0 of 6);
+        }
+        .action
+        {
+            @include pre(2.5 of 6);
+            @include span(1 of 6);
+        }
+
+    }
+
+
+    @include mappy-bp(large) 
+    {
+        .interest-rate-container-fv,
+        .initial-investment-container-ir,
+        .interest-rate-container-ii
+        {
+            @include pre(.6 of 8);
+            @include span(1 of 8);
+            @include post(1 of 8);
+        }
+        .period-container-fv,
+        .period-container-ir,
+        .period-container-ii
+        {
+            @include pre(.8 of 8);
+            @include span(1 of 8);
+            @include post(0 of 8);
+        }
+        .initial-investment-container-fv,
+        .future-value-container-ir,
+        .future-value-container-ii
+        {
+            @include pre(1.6 of 8);
+            @include span(1 of 8);
+            @include post(1 of 8);
+        }
+        .action
+        {
+            @include pre(3.4 of 8);
+        }
+
+    }
+
+    @include mappy-bp(wide) 
+    {
+        .interest-rate-container-fv,
+        .initial-investment-container-ir,
+        .interest-rate-container-ii
+        {
+            @include pre(1 of 12);
+            @include span(2 of 12);
+            @include post(1 of 12);
+        }
+        .period-container-fv,
+        .period-container-ir,
+        .period-container-ii
+        {
+            @include pre(1 of 12);
+            @include span(2 of 12);
+            @include post(1.1 of 12);
+        }
+        .initial-investment-container-fv,
+        .future-value-container-ir,
+        .future-value-container-ii
+        {
+            @include pre(1 of 12);
+            @include span(2 of 12);
+            @include post(1 of 12);
+        }
+        .action
+        {
+            @include pre(5 of 12);
+        }
+    }
+}
+
 html {
     font-size: 62.5%;
 }

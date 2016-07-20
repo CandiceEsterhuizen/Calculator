@@ -8,43 +8,62 @@
 
     <body>
         <div class="grid">
-            <header>Calculator</header>
-
-            <section id="calc-future-value">
-                <label class="interest-rate">Effective interest rate</label> 
-                <input type="number" placeholder="10%" id="interest-rate">
-
-
-
-                <label class="period">Period</label>
-                <input type="number" placeholder="5" id="period">
-
-
-
-                <label class="initial-investment">Initial value</label>
-                <input type="tel" placeholder="R100.00" id="init-investment">
-
-
-
-                <input class="btn-calculate" type="submit" value="Calculate">
-                <div class="future-value" id="output"></div>
-            </section>
-
-            <section id="calc-interest-rate">
-                <label class="initial-investment">Initial value</label>
-                <input type="tel" placeholder="R100.00" id="init-investment">
-
-
-                <label class="period">Period</label>
-                <input type="number" placeholder="5" id="period">
-
-                <label class="future-value">Future Value</label>
-                <input type="tel" placeholder="R161.05" id="future-value">
-
-                <input class="btn-calculate" type="submit" value="Calculate">
-                <div id="interest-rate-output"></div>
-            </section>
             
+            <!-- calculate the  future value(fv)-->
+            <section id="calc-future-value">
+                <div class="interest-rate-container-fv">
+                    <label>Effective interest rate</label> <br />
+                    <input type="number" placeholder="10%" id="interest-rate-fv">
+                </div>
+                <div class="period-container-fv">
+                    <label>Period</label> <br />
+                    <input type="number" placeholder="5" id="period-fv" >
+                </div>
+                <div class="initial-investment-container-fv">
+                    <label>Initial investment</label> <br />
+                    <input type="tel" placeholder="R100.00" id="init-investment-fv">
+                </div>
+            </section>
+            <!-- end future value(fv)-->
+
+            <!-- calculate the interest rate(ir)-->
+            <section id="calc-interest-rate">
+                <div class="initial-investment-container-ir">
+                    <label>Initial investment</label> <br />
+                    <input type="tel" placeholder="R100.00" id="init-investment-ir">
+                </div>
+                <div class="period-container-ir">
+                    <label>Period</label> <br />
+                    <input type="number" placeholder="5" id="period-ir">
+                </div>
+                <div class="future-value-container-ir">
+                    <label>Future Value</label> <br />
+                    <input type="tel" placeholder="R161.05" id="future-value-ir">
+                </div>
+            </section>
+            <!-- end interest rate(ir) -->
+            
+            <!-- calculate the initial investment(ii) -->
+            <section id="calc-initial-investment">
+                <div class="interest-rate-container-ii">
+                    <label>Effective interest rate</label> <br />
+                    <input type="number" placeholder="10%" id="interest-rate-ii">
+                </div>
+                <div class="period-container-ii">
+                    <label>Period</label> <br />
+                    <input type="number" placeholder="5" id="period-ii">
+                </div>
+                <div class="future-value-container-ii">
+                    <label>Future Value</label> <br />
+                    <input type="tel" placeholder="R161.05" id="future-value-ii">
+                </div>
+            </section>
+            <!-- end initial investment(ii) -->
+            
+            <div class="action">
+                <input type="submit" value="Calculate" id="btn-calculate">
+                <div id="output">OUTPUT HERE</div>
+            </div>
         </div>
     </body>
 </html>
