@@ -1,0 +1,106 @@
+$colour-font:#666;
+$colour-primary:#fff;
+$colour-secondary: #000;
+$colour-tertiary: #666;
+
+.input{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    //margin: 1em;
+    max-width: 350px;
+    //width: calc(100% - 2em);
+    vertical-align: top;
+    font-size: 1.8rem;
+    line-height: 2.0rem;
+    
+    
+    
+    .input__field{
+        z-index: 10;
+        width: 100%;
+        background: transparent;
+        color: $colour-primary;
+        opacity: 0;
+        transition: opacity 0.3s;
+        position: relative;
+        display: block;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 0;
+        font-weight: bold;
+        appearance: none;
+        font-size:1.8rem;
+        
+        &:focus{
+            opacity: 1;
+	        transition-delay: 0.3s;
+        }
+        
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+    
+    &.input--filled .input__field{
+        opacity: 1;
+        transition-delay: 0.3s;
+    }
+    
+    .input__field:focus + input__label:before, 
+    &.input--filled .input__label:before{
+        transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+    }
+    
+    .input__field:focus + input__label:after,
+    &.input--filled .input__label:after{
+        transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+    }
+    
+    .input__label{
+        position: relative;
+        width: 100%;
+        color: $colour-primary;
+        text-align: left;
+        display: inline-block;
+        font-weight: bold;
+        font-smoothing: antialiased;
+        user-select: none;
+        
+        &:before,
+        &:after{
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        
+        &:before{
+            bottom: 100%;
+            left: 0;
+            height: 4rem;
+            background: $colour-secondary;
+            transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+            transform-origin: 50% 100%;
+        }
+        
+        &:after{
+            top: 0;
+            left: 0;
+            height: 0.25rem;
+            background: $colour-tertiary;
+            transform-origin: 50% 0%;
+        }
+        
+        span{
+            position: relative;
+            display: block;
+            padding: 0.75rem 0;
+            width: 100%;
+            color: $colour-font;
+        }
+    }
+}
