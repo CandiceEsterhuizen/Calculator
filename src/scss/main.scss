@@ -7,146 +7,199 @@
 //@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
 //$font-openSans: 'Open Sans', sans-serif;
 
-.grid {
-    position: relative;
-    .interest-rate-container-fv,
-    .initial-investment-container-ir,
-    .interest-rate-container-ii
-    {
-        @include pre(0 of 4);
-        @include span(1 of 4);
-    }
-    .period-container-fv,
-    .period-container-ir,
-    .period-container-ii
-    {
-        @include pre(.2 of 4);
-        @include span(1 of 4);
-    }
-    .initial-investment-container-fv,
-    .future-value-container-ir,
-    .future-value-container-ii
-    {
-        @include pre(.2 of 4);
-        @include span(1 of 4);
-    }
-    .action
-    {
-        @include pre(1.5 of 4);
-        @include span(1 of 4);
-    }
-
-    @include mappy-bp(med) 
-    {
-        .interest-rate-container-fv,
-        .initial-investment-container-ir,
-        .interest-rate-container-ii
-        {
-            @include pre(.3 of 6);
-            @include span(1 of 6);
-            @include post(0 of 6);
-        }
-        .period-container-fv,
-        .period-container-ir,
-        .period-container-ii
-        {
-            @include pre(1 of 6);
-            @include span(1 of 6);
-            @include post(0 of 6);
-        }
-        .initial-investment-container-fv,
-        .future-value-container-ir,
-        .future-value-container-ii
-        {
-            @include pre(1 of 6);
-            @include span(1 of 6);
-            @include post(0 of 6);
-        }
-        .action
-        {
-            @include pre(2.5 of 6);
-            @include span(1 of 6);
-        }
-
-    }
-
-
-    @include mappy-bp(large) 
-    {
-        .interest-rate-container-fv,
-        .initial-investment-container-ir,
-        .interest-rate-container-ii
-        {
-            @include pre(.6 of 8);
-            @include span(1 of 8);
-            @include post(1 of 8);
-        }
-        .period-container-fv,
-        .period-container-ir,
-        .period-container-ii
-        {
-            @include pre(.8 of 8);
-            @include span(1 of 8);
-            @include post(0 of 8);
-        }
-        .initial-investment-container-fv,
-        .future-value-container-ir,
-        .future-value-container-ii
-        {
-            @include pre(1.6 of 8);
-            @include span(1 of 8);
-            @include post(1 of 8);
-        }
-        .action
-        {
-            @include pre(3.4 of 8);
-        }
-
-    }
-
-    @include mappy-bp(wide) 
-    {
-        .interest-rate-container-fv,
-        .initial-investment-container-ir,
-        .interest-rate-container-ii,
-        .interest-rate-container-p
-        {
-            @include pre(1 of 12);
-            @include span(2 of 12);
-            @include post(1 of 12);
-        }
-        .period-container-fv,
-        .period-container-ir,
-        .period-container-ii,
-        .initial-investment-container-p
-        {
-            @include pre(1 of 12);
-            @include span(2 of 12);
-            @include post(1.1 of 12);
-        }
-        .initial-investment-container-fv,
-        .future-value-container-ir,
-        .future-value-container-ii,
-        .future-value-container-p
-        {
-            @include pre(1 of 12);
-            @include span(2 of 12);
-            @include post(1 of 12);
-        }
-        .action
-        {
-            @include pre(5 of 12);
-        }
-    }
-}
+$text-colour: #666;
 
 html {
     font-size: 62.5%;
 }
 
+body{
+    font-size: 1.4rem;
+    color: $text-colour;
+}
+
 h1{
-    color:red;
+    color:$text-colour;
     font-size: 5.4rem;
     text-align: center;
     padding:40px 0;
+}
+
+a{
+    text-decoration: none;
+    color: $text-colour;
+}
+
+section{
+    //display:none;
+}
+
+.input{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 1em;
+    max-width: 350px;
+    width: calc(100% - 2em);
+    vertical-align: top;
+    
+    input{
+        z-index: 10;
+        width: 100%;
+        background: transparent;
+        color: #f5f5f5;
+        opacity: 0;
+        transition: opacity 0.3s;
+        position: relative;
+        display: block;
+        float: right;
+        padding: 0.8em;
+        border: none;
+        border-radius: 0;
+        font-weight: bold;
+        appearance: none;
+        
+        &:focus{
+            opacity: 1;
+	        transition-delay: 0.3s;
+        }
+        
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+    
+    &.input--filled input{
+        opacity: 1;
+        transition-delay: 0.3s;
+    }
+    
+    input:focus + label:before, 
+    &.input--filled label:before{
+        transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+    }
+    
+    input:focus + label:after,
+    &.input--filled label:after{
+        transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+    }
+    
+    label{
+        position: relative;
+        width: 100%;
+        color: #b04b40;
+        text-align: left;
+        
+        display: inline-block;
+        float: right;
+        padding: 0 1em;
+        font-weight: bold;
+        font-size: 70.25%;
+        font-smoothing: antialiased;
+        user-select: none;
+        
+        &:before{
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            width: 100%;
+            height: 4em;
+            background: #c5564a;
+            transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+            transform-origin: 50% 100%;
+            transition: transform 0.3s;
+        }
+        
+        &:after{
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0.25em;
+            background: #ad473c;
+            transform-origin: 50% 0%;
+            transition: transform 0.3s;
+        }
+        
+        span{
+            position: relative;
+            display: block;
+            padding: 0.75em 0;
+            width: 100%;
+        }
+    }
+}
+
+/*
+.input__field--yoko:focus,
+.input--filled .input__field--yoko {
+	opacity: 1;
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+
+.input__field--yoko:focus + .input__label--yoko::before,
+.input--filled .input__label--yoko::before {
+	-webkit-transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+	transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+}
+
+.input__field--yoko:focus + .input__label--yoko,
+.input--filled .input__label--yoko {
+	pointer-events: none;
+}
+
+.input__field--yoko:focus + .input__label--yoko::after,
+.input--filled .input__label--yoko::after {
+	-webkit-transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+	transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+}
+
+*/
+
+
+
+.dropdown{
+    position: relative;
+    
+    button, ul{
+        width: 100%;
+    }
+    
+    button{
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 1.6rem;
+        border: none;
+        cursor: pointer;
+    }
+    
+    &:hover ul{
+        display: block;
+    }
+    
+    ul{
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        
+        li{
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            
+            &:hover{
+                background-color: #f1f1f1;
+            }
+        }
+    }
 }

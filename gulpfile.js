@@ -2,6 +2,7 @@
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     cleanCSS = require('gulp-clean-css'),
+    concat = require('gulp-concat'),
     connect = require('gulp-connect'),
     imagemin = require('gulp-imagemin'),
     notify = require('gulp-notify'),
@@ -26,6 +27,11 @@ gulp.task('styles', function(){
 
 gulp.task('scripts', function(){
     return gulp.src('src/js/*.js')
+    .pipe(order([
+        'classie.js',
+        'main.js'
+    ]))
+    .pipe(concat('main.js'))
     .pipe(gulp.dest('public/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
