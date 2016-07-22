@@ -28,6 +28,7 @@ gulp.task('styles', function(){
 gulp.task('scripts', function(){
     return gulp.src('src/js/*.js')
     .pipe(order([
+        'Chart.js',
         'classie.js',
         'main.js'
     ]))

@@ -39,89 +39,28 @@
     
     <section class="grid" id="single-investments">
         <span class="input">
-           <input class="input__field" type="number" placeholder="10%" id="interest-rate-fv">
+           <input class="input__field" type="number" placeholder="10%" id="interest-rate">
             <label class="input__label">
-                <span>Effective interest rate</span>
+                <span>Effective Interest Rate</span>
             </label>
         </span>
-        <span class="input">
-           <input class="input__field" type="number" placeholder="5" id="period-fv">
+        <!--span class="input">
+           <input class="input__field" type="number" placeholder="5" id="period">
             <label class="input__label">
                 <span>Period</span>
+            </label>
+        </span-->
+        <span class="input">
+           <input class="input__field" type="number" placeholder="100" id="period">
+            <label class="input__label">
+                <span>Initial Investment</span>
             </label>
         </span>
     </section>
     
-    <div class="grid">
-        <!-- calculate the  future value(fv)>
-            <section id="calc-future-value">
-                <div class="interest-rate-container-fv">
-                    <label>Effective interest rate</label> <br />
-                    <input type="number" placeholder="10%" id="interest-rate-fv">
-                </div>
-                <div class="period-container-fv">
-                    <label>Period</label> <br />
-                    <input type="number" placeholder="5" id="period-fv" >
-                </div>
-                <div class="initial-investment-container-fv">
-                    <label>Initial investment</label> <br />
-                    <input type="tel" placeholder="R100.00" id="init-investment-fv">
-                </div>
-            </section>
-            < end future value(fv)-->
-        <!-- calculate the interest rate(ir)>
-            <section id="calc-interest-rate">
-                <div class="initial-investment-container-ir">
-                    <label>Initial investment</label> <br />
-                    <input type="tel" placeholder="R100.00" id="init-investment-ir">
-                </div>
-                <div class="period-container-ir">
-                    <label>Period</label> <br />
-                    <input type="number" placeholder="5" id="period-ir">
-                </div>
-                <div class="future-value-container-ir">
-                    <label>Future Value</label> <br />
-                    <input type="tel" placeholder="R161.05" id="future-value-ir">
-                </div>
-            </section>
-            < end interest rate(ir) -->
-        <!-- calculate the initial investment(ii) >
-            <section id="calc-initial-investment">
-                <div class="interest-rate-container-ii">
-                    <label>Effective interest rate</label> <br />
-                    <input type="number" placeholder="10%" id="interest-rate-ii">
-                </div>
-                <div class="period-container-ii">
-                    <label>Period</label> <br />
-                    <input type="number" placeholder="5" id="period-ii">
-                </div>
-                <div class="future-value-container-ii">
-                    <label>Future Value</label> <br />
-                    <input type="tel" placeholder="R161.05" id="future-value-ii">
-                </div>
-            </section>
-            < end initial investment(ii) -->
-        <!-- calculate the period(p) >
-            <section id="calc-period">
-                <div class="interest-rate-container-p">
-                    <label>Effective interest rate</label> <br />
-                    <input type="number" placeholder="10%" id="interest-rate-p">
-                </div>
-                <div class="initial-investment-container-p">
-                    <label>Initial investment</label> <br />
-                    <input type="tel" placeholder="R100.00" id="init-investment-p">
-                </div>
-                <div class="future-value-container-p">
-                    <label>Future Value</label> <br />
-                    <input type="tel" placeholder="R161.05" id="future-value-p">
-                </div>
-            </section>
-            < end period(p) -->
-        <!--div class="action">
-            <input type="submit" value="Calculate" id="btn-calculate">
-            <div id="output"></div>
-        </div-->
-    </div>
+    <section class="grid" id="output">
+        <canvas id="myChart"></canvas>
+    </section>
 </body>
 
 </html>
