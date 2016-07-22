@@ -108,7 +108,8 @@
     {
         .interest-rate-container-fv,
         .initial-investment-container-ir,
-        .interest-rate-container-ii
+        .interest-rate-container-ii,
+        .interest-rate-container-p
         {
             @include pre(1 of 12);
             @include span(2 of 12);
@@ -116,7 +117,8 @@
         }
         .period-container-fv,
         .period-container-ir,
-        .period-container-ii
+        .period-container-ii,
+        .initial-investment-container-p
         {
             @include pre(1 of 12);
             @include span(2 of 12);
@@ -124,7 +126,8 @@
         }
         .initial-investment-container-fv,
         .future-value-container-ir,
-        .future-value-container-ii
+        .future-value-container-ii,
+        .future-value-container-p
         {
             @include pre(1 of 12);
             @include span(2 of 12);

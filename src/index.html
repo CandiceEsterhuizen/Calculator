@@ -8,7 +8,7 @@
 
     <body>
         <div class="grid">
-            
+
             <!-- calculate the  future value(fv)-->
             <section id="calc-future-value">
                 <div class="interest-rate-container-fv">
@@ -42,7 +42,7 @@
                 </div>
             </section>
             <!-- end interest rate(ir) -->
-            
+
             <!-- calculate the initial investment(ii) -->
             <section id="calc-initial-investment">
                 <div class="interest-rate-container-ii">
@@ -60,9 +60,28 @@
             </section>
             <!-- end initial investment(ii) -->
             
+            <!-- calculate the period(p) -->
+            <section id="calc-period">
+                <div class="interest-rate-container-p">
+                    <label>Effective interest rate</label> <br />
+                    <input type="number" placeholder="10%" id="interest-rate-p">
+                </div>
+                <div class="initial-investment-container-p">
+                    <label>Initial investment</label> <br />
+                    <input type="tel" placeholder="R100.00" id="init-investment-p">
+                </div>
+                <div class="future-value-container-p">
+                    <label>Future Value</label> <br />
+                    <input type="tel" placeholder="R161.05" id="future-value-p">
+                </div>
+            </section>
+            <!-- end period(p) -->
+            
+            
+
             <div class="action">
                 <input type="submit" value="Calculate" id="btn-calculate">
-                <div id="output">OUTPUT HERE</div>
+                <div id="output"></div>
             </div>
         </div>
     </body>
