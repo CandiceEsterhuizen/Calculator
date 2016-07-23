@@ -39,7 +39,7 @@
     
     <section class="grid" id="single-investments">
         <span class="input">
-           <input class="input__field" type="number" placeholder="10%" id="interest-rate">
+           <input class="input__field" type="number" placeholder="10%" max="100" min="0" id="interest-rate">
             <label class="input__label">
                 <span>Effective Interest Rate</span>
             </label>
@@ -51,7 +51,7 @@
             </label>
         </span-->
         <span class="input">
-           <input class="input__field" type="number" placeholder="100" id="period">
+           <input class="input__field" type="number" placeholder="100" max="9999" min="0" id="period">
             <label class="input__label">
                 <span>Initial Investment</span>
             </label>
@@ -60,6 +60,7 @@
     
     <section class="grid" id="output">
         <canvas id="chart"></canvas>
+        <div id="output1"></div>
     </section>
 </body>
 
