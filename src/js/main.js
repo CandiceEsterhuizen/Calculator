@@ -3,25 +3,29 @@
     function Calculator() {
         this.$inputs = {
             interestRate: document.getElementById('interest-rate'), 
-            period: document.getElementById('period')
-}, 
+            investment: document.getElementById('investment')
+        },
+        this.$outputs = {
+           // interestRate : 
+        }
         this.chart = {
                 tag: document.getElementById('chart')
                 , object: ''
-            },
-            
+        }, 
         this._model = {
             interestRate : 0,
+            investment : 0,
             derived: {
-                interestRate: function(val){
-                    return (val / 100) + 1;                    
+                interestRate: function(){
+                    return (this._model.interestRate / 100) + 1;
+                }.bind(this),
+                investment: function(){
+                    return Math.round(this._model.investment * this._model.derived.interestRate());
                 }.bind(this)
             }
         }
         
     }
-    
-    //Calculator.prototype.derived
     
     Calculator.prototype.bindUIEvents = function () {
         var that = this;
@@ -31,7 +35,14 @@
             }
             that.$inputs[key].addEventListener('focus', onInputFocus);
             that.$inputs[key].addEventListener('blur', onInputBlur);
-            that.$inputs[key].addEventListener('input', onInputChange);
+            that.$inputs[key].addEventListener('input', function(){onInputChange(key)});
+        })
+    }
+    
+    Calculator.prototype.updateOutputs = function () {
+        var that = this;
+        Object.keys(this._model.derived).forEach(function (key) {
+            console.log("Output for "+key+": "+myCalculator._model.derived[key]());
         })
     }
 
@@ -43,13 +54,12 @@
         
         if (evt.target.value.trim() === '') {
             classie.remove(evt.target.parentNode, 'input--filled');
-            
         }
     }
 
-    function onInputChange(evt) {
+    function onInputChange(key) {
         
-        var element =  evt.target;
+        var element =  myCalculator.$inputs[key];
         var value = parseFloat(element.value);
         var max = element.getAttribute('max');
         var min = element.getAttribute('min');
@@ -59,9 +69,10 @@
         else if(value < min)
             value = min;
         
+        myCalculator._model[key] = value;
+        //console.log("** "+key+" "+value);
         
-            this._model.interestRate = myCalculator._model.derived.interestRate(value);
-            console.log(this._model.interestRate);
+        myCalculator.updateOutputs();
     }
 
     function setupChart(element) {
