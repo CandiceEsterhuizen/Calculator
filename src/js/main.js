@@ -1,79 +1,43 @@
-
-/*function singleInterestHalfYear(intRate, period, initValue, output) {
-    var final = 0;
-    var  ii = initValue.value;
-    var p = period.value;
-    var ir = intRate.value;
-    display = output;
-
-    ir = ir/100; 
-    var temp = (1 + ir);
-    final = ii * Math.pow(temp, p);
-    final = final.toFixed(2);
-    console.log("final "+final);
-
-    // document.getElementById("half-future-value").innerHTML = "R" + final;
+function Calculator(){
+    this.inputs = {
+        interestRate: document.getElementById('interest-rate'),
+        period: document.getElementById('period')
+    },
+    this.chart = {
+        element: document.getElementById('chart'),
+        object: ''
+    }   
 }
 
-window.onload = function() {
-    var interestRateFV = document.getElementById("interest-rate-fv");
-    var periodFV = document.getElementById("period-fv");
-    var initialInvestmentFV = document.getElementById("init-investment-fv");
-
-    // var initialInvestmentIR = document.getElementById("init-investment-ir");
-    // var periodIR = document.getElementById("period-ir");
-    // var futureValueIR = document.getElementById("future-value-ir");
-
-    // var interestRateII = document.getElementById("interest-rate-ii");
-    // var periodII = document.getElementById("period-ii");
-    // var futureValueII = document.getElementById("future-value-ii");
-
-    var output = document.getElementById("output");
-    var btnCalculate = document.getElementById("btn-calculate").addEventListener("click", function() {
-        singleInterestHalfYear(interestRateFV, periodFV, initialInvestmentFV, output);
-    });
-}*/
-
-(function() {
-    // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-    if (!String.prototype.trim) {
-        (function() {
-            // Make sure we trim BOM and NBSP
-            var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-            String.prototype.trim = function() {
-                return this.replace(rtrim, '');
-            };
-        })();
-    }
-
-    [].slice.call( document.querySelectorAll( 'input' ) ).forEach( function( inputEl ) {
-        // in case the input is already filled..
-        if( inputEl.value.trim() !== '' ) {
-            classie.add( inputEl.parentNode, 'input--filled' );
+Calculator.prototype.bindUIEvents = function(){
+    var that = this;
+    Object.keys(this.inputs).forEach(function(key){
+        if(that.inputs[key].value.trim() !== ''){
+            classie.add( that.inputs[key].parentNode, 'input--filled' );
         }
+        
+        that.inputs[key].addEventListener( 'focus', onInputFocus );
+        that.inputs[key].addEventListener( 'blur', onInputBlur );
+    })
+}
 
-        // events:
-        inputEl.addEventListener( 'focus', onInputFocus );
-        inputEl.addEventListener( 'blur', onInputBlur );
-    } );
+function onInputFocus(evt){
+    classie.add( evt.target.parentNode, 'input--filled' );
+}
 
-    function onInputFocus( ev ) {
-        classie.add( ev.target.parentNode, 'input--filled' );
+function onInputBlur(evt) {
+    if( evt.target.value.trim() === '' ) {
+        classie.remove( evt.target.parentNode, 'input--filled' );
     }
+}
 
-    function onInputBlur( ev ) {
-        if( ev.target.value.trim() === '' ) {
-            classie.remove( ev.target.parentNode, 'input--filled' );
-        }
-    }
-    
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
+function setupChart(element){
+    var myChart = new Chart(element, {
         type: 'line',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: ["12 months", "24 months", "36 months", "48 months", "52 months"],
             datasets: [{
-                label: '# of Votes',
+                label: 'Monthly',
                 data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)'
@@ -84,7 +48,7 @@ window.onload = function() {
                 borderWidth: 1
             },
             {
-                label: '# of Votes',
+                label: 'Quateryly',
                 data: [20, 30, 3, 5, 2, 3],
                 backgroundColor: [
                     'rgba(0, 99, 132, 0.2)'
@@ -105,4 +69,13 @@ window.onload = function() {
             }
         }
     });
+    
+    return myChart;
+}
+
+(function() {
+    var calc = new Calculator();
+    calc.bindUIEvents();
+    calc.chart.object = setupChart(calc.chart.element);
+
 })();

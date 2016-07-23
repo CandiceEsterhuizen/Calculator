@@ -21,7 +21,7 @@ gulp.task('styles', function(){
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('public/css'))
     .pipe(cleanCSS())
-    .pipe(notify({ message: 'Styles task complete' }))
+    //.pipe(notify({ message: 'Styles task complete' }))
     .pipe(connect.reload());
 });
 
@@ -44,7 +44,7 @@ gulp.task('scripts', function(){
 gulp.task('html', function(){
     return gulp.src('src/index.html')
     .pipe(gulp.dest('public'))
-    .pipe(notify({ message: 'HTML task complete' }))
+    //.pipe(notify({ message: 'HTML task complete' }))
     .pipe(connect.reload());
 });
 
