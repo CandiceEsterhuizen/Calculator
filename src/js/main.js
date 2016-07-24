@@ -15,14 +15,16 @@
         this._model = {
             interestRate : 0,
             investment : 0,
+            periods : [20, 60],
             derived: {
                 interestRate: function(){
                     return (this._model.interestRate / 100) + 1;
                 }.bind(this),
                 investment: function(){
-                    return Math.round(this._model.investment * this._model.derived.interestRate());
-                }.bind(this)
-            }
+                    //return Math.round(this._model.investment * this._model.derived.interestRate());
+                }.bind(this),
+            },
+            
         }
         
     }
@@ -42,10 +44,28 @@
     Calculator.prototype.updateOutputs = function () {
         var that = this;
         Object.keys(this._model.derived).forEach(function (key) {
-            console.log("Output for "+key+": "+myCalculator._model.derived[key]());
+            for(var i=0; i<that._model.periods.length; i++){
+                that.chart.object.data.datasets[i].data = compoundInterest(that._model.periods[i], that._model.derived.interestRate(), that._model.investment);
+            }
+            that.chart.object.update();
         })
     }
 
+    function compoundInterest(period, interestRate, investment){
+        //console.log("Calculation initial: "+period+" "+interestRate+" "+investment);
+        var steps = period / 5;
+        var output = new Array(5);
+        
+        for(var i = 0; i <= 5; i++){
+            var temp = steps * i;
+            output[i] = Math.round(Math.pow(interestRate, temp) * investment);
+        }
+        
+        var goal = Math.round((Math.pow(interestRate, period) * investment));
+        //console.log("Calculation: "+output+"      Goal: "+goal);
+        return output;
+    }
+    
     function onInputFocus(evt) {
         classie.add(evt.target.parentNode, 'input--filled');
     }
@@ -77,39 +97,31 @@
 
     function setupChart(element) {
         var myChart = new Chart(element, {
-            type: 'line'
-            , data: {
-                labels: ["12 months", "24 months", "36 months", "48 months", "52 months"]
-                , datasets: [{
-                        label: 'Monthly'
-                        , data: [12, 19, 3, 5, 2, 3]
-                        , backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)'
-                ]
-                        , borderColor: [
-                    'rgba(255,99,132,1)'
-                ]
-                        , borderWidth: 1
-            }
-                    , {
-                        label: 'Quateryly'
-                        , data: [20, 30, 3, 5, 2, 3]
-                        , backgroundColor: [
-                    'rgba(0, 99, 132, 0.2)'
-                ]
-                        , borderColor: [
-                    'rgba(0,99,132,1)'
-                ]
-                        , borderWidth: 1
-            }]
-            }
-            , options: {
+            type: 'line', 
+            data: {
+                labels: ["0", "12 months", "24 months", "36 months", "48 months", "60 months"], 
+                datasets: [{
+                    label: 'Monthly', 
+                    data: [0, 0, 0, 0, 0, 0],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)'], 
+                    borderColor: ['rgba(255,99,132,1)'], 
+                    borderWidth: 1
+                },
+                {
+                    label: 'Semesterly',
+                    data: [0, 0, 0, 0, 0, 0], 
+                    backgroundColor: ['rgba(0, 99, 132, 0.2)'],
+                    borderColor: ['rgba(0,99,132,1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
                 scales: {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
                         }
-                }]
+                    }]
                 }
             }
         });
@@ -119,4 +131,9 @@
     var myCalculator = new Calculator();
     myCalculator.bindUIEvents();
     myCalculator.chart.object = setupChart(myCalculator.chart.tag);
+    
+    //console.log("Chart: "+myCalculator.chart.object.data.datasets[0]);
+    //myCalculator.chart.object.data.datasets[0].data = [0, 1, 2, 3, 4];
+    //myCalculator.chart.object.update();
+    //compoundInterest(60, 1.1, 100);
 })();
