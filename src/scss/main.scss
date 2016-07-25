@@ -5,7 +5,7 @@
 @import "input";
 @import "font-awesome";
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
 $font-openSans: 'Open Sans', sans-serif;
 
 $text-colour: #666;
@@ -21,11 +21,25 @@ body{
     font-family: $font-openSans;
 }
 
-h1{
+h1, h3{
     color:$text-colour;
-    font-size: 5.4rem;
     text-align: center;
-    padding:40px 0;
+}
+
+h1{
+    font-size: 5.4rem;
+    line-height: 5.4rem;
+    padding:20px 0;
+}
+
+h3{
+    font-size: 3.2rem;
+    line-height: 3.2rem;
+    padding:10px 0;
+}
+
+p{
+    padding:10px 0;
 }
 
 a{
@@ -34,11 +48,17 @@ a{
 }
 
 section{
-    //display:none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.show{
+    max-height: 1000px;
 }
 
 header, nav, section, footer{
-    padding:20px 0;
+    margin:40px 0;
 }
 
 *:focus {
@@ -89,6 +109,7 @@ header, nav, section, footer{
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            cursor: pointer;
             
             &:hover{
                 background-color: #f1f1f1;
