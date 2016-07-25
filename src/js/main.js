@@ -2,8 +2,14 @@
     
     function Calculator() {
         this.$inputs = {
-            interestRate: document.getElementById('interest-rate'), 
-            investment: document.getElementById('investment')
+            menu: {
+                
+            },
+            compoundInterest: {
+                interestRate: document.getElementById('interest-rate'), 
+                investment: document.getElementById('investment')
+            }
+
         },
         this.$outputs = {
            // interestRate : 
@@ -13,42 +19,62 @@
                 , object: ''
         }, 
         this._model = {
-            interestRate : 0,
-            investment : 0,
-            periods : [20, 60],
-            derived: {
-                interestRate: function(){
-                    return (this._model.interestRate / 100) + 1;
-                }.bind(this),
-                investment: function(){
-                    //return Math.round(this._model.investment * this._model.derived.interestRate());
-                }.bind(this),
-            },
-            
-        }
-        
+            compoundInterest:{
+                interestRate : 0,
+                investment : 0,
+                periods : [5, 10, 20/*, 60*/],
+                derived: {
+                    interestRate: function(){
+                        return (this._model.compoundInterest.interestRate / 100) + 1;
+                    }.bind(this),
+                    investment: function(){
+                        //return Math.round(this._model.investment * this._model.derived.interestRate());
+                    }.bind(this),
+                },
+            }
+        };
+        this.init();
+    }
+    
+    Calculator.prototype.init = function() {
+        console.log("Init");
+        //document.getElementById('mainNav').style.display = "block";
     }
     
     Calculator.prototype.bindUIEvents = function () {
         var that = this;
-        Object.keys(this.$inputs).forEach(function (key) {
-            if (that.$inputs[key].value.trim() !== '') {
-                classie.add(that.$inputs[key].parentNode, 'input--filled');
-            }
-            that.$inputs[key].addEventListener('focus', onInputFocus);
-            that.$inputs[key].addEventListener('blur', onInputBlur);
-            that.$inputs[key].addEventListener('input', function(){onInputChange(key)});
+        Object.keys(this.$inputs).forEach(function (keyMain) {
+            
+            Object.keys(that.$inputs[keyMain]).forEach(function (keySub) {
+                
+                //console.log("keyMain: "+keyMain+"  $inputs[keyMain]:"+that.$inputs[keyMain]+"  keySub:"+keySub+"  $inputs[keyMain][keySub]:"+that.$inputs[keyMain][keySub])
+                
+                if (that.$inputs[keyMain][keySub].value.trim() !== '') {
+                    classie.add(that.$inputs[keyMain][keySub].parentNode, 'input--filled');
+                }
+                that.$inputs[keyMain][keySub].addEventListener('focus', onInputFocus);
+                that.$inputs[keyMain][keySub].addEventListener('blur', onInputBlur);
+                that.$inputs[keyMain][keySub].addEventListener('input', function(){onInputChange(keyMain, keySub)});
+            })
         })
     }
     
-    Calculator.prototype.updateOutputs = function () {
+    Calculator.prototype.updateOutputs = function (keyMain) {
         var that = this;
-        Object.keys(this._model.derived).forEach(function (key) {
-            for(var i=0; i<that._model.periods.length; i++){
-                that.chart.object.data.datasets[i].data = compoundInterest(that._model.periods[i], that._model.derived.interestRate(), that._model.investment);
+        //Object.keys(this._model[keyMain].derived).forEach(function (subKey) {
+            
+            for(var i=0; i<that._model[keyMain].periods.length; i++){
+                console.log(that._model[keyMain].periods[i]+" "+that._model[keyMain].derived.interestRate()+" "+that._model[keyMain].investment);
+                that.chart.object.data.datasets[i].data = compoundInterest(that._model[keyMain].periods[i], that._model[keyMain].derived.interestRate(), that._model[keyMain].investment);
             }
             that.chart.object.update();
-        })
+            
+            
+            /*for(var i=0; i<that._model.periods.length; i++){
+                that.chart.object.data.datasets[i].data = compoundInterest(that._model.periods[i], that._model.derived.interestRate(), that._model.investment);
+            }
+            that.chart.object.update();*/
+        //})
     }
 
     function compoundInterest(period, interestRate, investment){
@@ -77,9 +103,9 @@
         }
     }
 
-    function onInputChange(key) {
+    function onInputChange(main, sub) {
         
-        var element =  myCalculator.$inputs[key];
+        var element =  myCalculator.$inputs[main][sub];
         var value = parseFloat(element.value);
         var max = element.getAttribute('max');
         var min = element.getAttribute('min');
@@ -89,10 +115,9 @@
         else if(value < min)
             value = min;
         
-        myCalculator._model[key] = value;
-        //console.log("** "+key+" "+value);
+        myCalculator._model[main][sub] = value;
         
-        myCalculator.updateOutputs();
+        myCalculator.updateOutputs(main);
     }
 
     function setupChart(element) {
@@ -101,17 +126,24 @@
             data: {
                 labels: ["0", "12 months", "24 months", "36 months", "48 months", "60 months"], 
                 datasets: [{
-                    label: 'Monthly', 
+                    label: 'Yearly', 
                     data: [0, 0, 0, 0, 0, 0],
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)'], 
-                    borderColor: ['rgba(255,99,132,1)'], 
+                    backgroundColor: ['rgba(119, 136, 153, 0.2)'],
+                    borderColor: ['rgba(119, 136, 153, 1)'],
                     borderWidth: 1
                 },
                 {
                     label: 'Semesterly',
                     data: [0, 0, 0, 0, 0, 0], 
-                    backgroundColor: ['rgba(0, 99, 132, 0.2)'],
-                    borderColor: ['rgba(0,99,132,1)'],
+                    backgroundColor: ['rgba(128, 128, 128, 0.2)'],
+                    borderColor: ['rgba(128, 128, 128, 1)'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Quaterly',
+                    data: [0, 0, 0, 0, 0, 0],
+                    backgroundColor: ['rgba(192, 192, 192, 0.2)'], 
+                    borderColor: ['rgba(192, 192, 192, 1)'], 
                     borderWidth: 1
                 }]
             },
@@ -131,9 +163,4 @@
     var myCalculator = new Calculator();
     myCalculator.bindUIEvents();
     myCalculator.chart.object = setupChart(myCalculator.chart.tag);
-    
-    //console.log("Chart: "+myCalculator.chart.object.data.datasets[0]);
-    //myCalculator.chart.object.data.datasets[0].data = [0, 1, 2, 3, 4];
-    //myCalculator.chart.object.update();
-    //compoundInterest(60, 1.1, 100);
 })();

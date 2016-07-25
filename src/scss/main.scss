@@ -9,6 +9,7 @@
 $font-openSans: 'Open Sans', sans-serif;
 
 $text-colour: #666;
+$button-colour: #999;
 
 html {
     font-size: 62.5%;
@@ -34,7 +35,6 @@ a{
 
 section{
     //display:none;
-    
 }
 
 header, nav, section, footer{
@@ -54,7 +54,7 @@ header, nav, section, footer{
     }
     
     button{
-        background-color: #4CAF50;
+        background-color: $button-colour;
         color: white;
         padding: 16px;
         font-size: 1.6rem;
