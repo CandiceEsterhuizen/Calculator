@@ -18,7 +18,7 @@
         <div class="dropdown">
             <button>What would you like to calculate?</button>
             <ul>
-                <li id="conversion">Interest Rate Conversions
+                <li id="conversions">Interest Rate Conversions
                     <!--a href="#">Interest Rate Conversions</a-->
                 </li>
                 <li id="investments">Single Investments
@@ -37,30 +37,37 @@
         </div>
     </nav>
     
+    <section class="grid" id="interest-rate">
+        <span class="input">
+           <input class="input__field" type="number" placeholder="10%" max="100" min="0" id="ir-interest-rate">
+            <label class="input__label">
+                <span>Base Interest Rate</span>
+            </label>
+        </span>
+    </section>
+    
     <section class="grid" id="single-investments">
         <span class="input">
-           <input class="input__field" type="number" placeholder="10%" max="100" min="0" id="interest-rate">
+           <input class="input__field" type="number" placeholder="10%" max="100" min="0" id="si-interest-rate">
             <label class="input__label">
                 <span>Effective Interest Rate</span>
             </label>
         </span>
-        <!--span class="input">
-           <input class="input__field" type="number" placeholder="5" id="period">
-            <label class="input__label">
-                <span>Period</span>
-            </label>
-        </span-->
         <span class="input">
-           <input class="input__field" type="number" placeholder="100" max="9999" min="0" id="investment">
+           <input class="input__field" type="number" placeholder="100" max="9999" min="0" id="si-investment">
             <label class="input__label">
                 <span>Initial Investment</span>
             </label>
         </span>
+        <input id="si-period" type ="range" min ="1" max="5" step ="1" value ="3"/>
     </section>
     
     <section class="grid" id="output">
         <canvas id="chart"></canvas>
         <div id="output1"></div>
+        <div id="output2"></div>
+        <div id="output3"></div>
+        <div id="output4"></div>
     </section>
 </body>
 
