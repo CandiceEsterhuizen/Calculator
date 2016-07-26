@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     cleanCSS = require('gulp-clean-css'),
     concat = require('gulp-concat'),
     connect = require('gulp-connect'),
+    deploy = require('gulp-gh-pages');
     imagemin = require('gulp-imagemin'),
     notify = require('gulp-notify'),
     order = require('gulp-order'),
@@ -52,6 +53,11 @@ gulp.task('webserver', function() {
     connect.server({
         livereload: true
     });
+});
+
+gulp.task('deploy', function () {
+  return gulp.src("./public/**/*")
+    .pipe(deploy())
 });
 
 gulp.task('watch', function(){
