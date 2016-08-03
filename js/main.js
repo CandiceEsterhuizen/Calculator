@@ -10483,31 +10483,26 @@ if ( typeof define === 'function' && define.amd ) {
                     datasets: [{
                         label: 'Yearly', 
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: ['rgba(54, 65, 84, 1)'], 
-                        borderColor: ['rgba(47, 79, 79, 1)'], 
-                        borderWidth: 1
+                        backgroundColor: 'rgba(54, 65, 84, 1)', 
+                        borderColor: 'rgba(47, 79, 79, 1)'
                     },
                     {
                         label: 'Semesterly',
                         data: [0, 0, 0, 0, 0, 0, 0], 
-                        backgroundColor: ['rgba(37, 116, 169, 0.8)'],
-                        borderColor: ['rgba(119, 136, 153, 1)'],
-                        borderWidth: 1
+                        backgroundColor: 'rgba(37, 116, 169, 0.8)',
+                        borderColor: 'rgba(119, 136, 153, 1)'
                     },
                     {
                         label: 'Quaterly',
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: ['rgba(92, 151, 191, 0.5)'],  
-                        borderColor: ['rgba(128, 128, 128, 1)'],
-
-                        borderWidth: 1
+                        backgroundColor: 'rgba(92, 151, 191, 0.5)',  
+                        borderColor: 'rgba(128, 128, 128, 1)'
                     },
                     {
                         label: 'Monthly',
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: ['rgba(78, 205, 196, 0.2)'], 
-                        borderColor: ['rgba(192, 192, 192, 1)'], 
-                        borderWidth: 1
+                        backgroundColor: 'rgba(78, 205, 196, 0.2)', 
+                        borderColor: 'rgba(192, 192, 192, 1)'
                     }]
                 },
                 options: {
@@ -10702,7 +10697,8 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     function setupLineChart(element) {
-        var myChart = new Chart(element.chart.tag, element.chart.style);/*, {
+        var canvas = element.chart.tag.getContext("2d");
+        var myChart = new Chart(canvas, element.chart.style);/*, {
             type: 'line', 
             data: {
                 labels: ["0", "6 months", "12 months", "18 months", "24 months", "30 months", "36 months"], 
