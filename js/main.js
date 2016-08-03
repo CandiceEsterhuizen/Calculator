@@ -10604,13 +10604,16 @@ if ( typeof define === 'function' && define.amd ) {
                 this.chart[keyMain].object.data.datasets[i].data = returnArray;
                 this.chart.key = keyMain;
             }
+            this.chart[keyMain].style = myCalculator.chart.style;
+            //console.log("** whooop");
+        
             this.chart[keyMain].object.update();
             
         //})
     }
     
     function textOutput(index, value){
-        console.log(index+" "+value);
+        //console.log(index+" "+value);
         
         switch(index){
             case 0: writeOutput('output1', 'Yearly calculation:', value); break;
