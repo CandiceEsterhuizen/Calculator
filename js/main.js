@@ -10435,19 +10435,13 @@ if ( typeof define === 'function' && define.amd ) {
     function Calculator() {
         this.$inputs = {
             menu: {
-                // conversions: document.getElementById('conversions'), 
                 investments: document.getElementById('investments')
-                // annuities: document.getElementById('annuities'), 
-                // withdrawels: document.getElementById('withdrawels'),
-                // loans: document.getElementById('loans')
             },
-            // conversions: {
-            //     baseRate: document.getElementById('ir-interest-rate')
-            // },
             compoundInterest: {
                 interestRate: document.getElementById('si-interest-rate'), 
                 investment: document.getElementById('si-investment'),
-                period: document.getElementById('si-period')
+                period: document.getElementById('si-period'),
+                periodLabel: document.getElementById('si-period-label')
             }
 
         },
@@ -10462,7 +10456,6 @@ if ( typeof define === 'function' && define.amd ) {
         },
         this.sections = {
             current: '',
-            // conversions: document.getElementById('interest-rate'),
             investments: document.getElementById('single-investments')
         },
         this.chart = {
@@ -10483,26 +10476,34 @@ if ( typeof define === 'function' && define.amd ) {
                     datasets: [{
                         label: 'Yearly', 
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(54, 65, 84, 1)', 
-                        borderColor: 'rgba(47, 79, 79, 1)'
+                        backgroundColor: 'rgba(54, 65, 84, 0.25)',
+                        borderColor: 'rgba(54, 65, 84, 0.5)',
+                        pointBorderColor: 'rgba(54, 65, 84, 1)',
+                        pointBackgroundColor: 'rgba(54, 65, 84, 1)'
                     },
                     {
                         label: 'Semesterly',
                         data: [0, 0, 0, 0, 0, 0, 0], 
-                        backgroundColor: 'rgba(37, 116, 169, 0.8)',
-                        borderColor: 'rgba(119, 136, 153, 1)'
+                        backgroundColor: 'rgba(37, 116, 169, 0.25)',
+                        borderColor: 'rgba(37, 116, 169, 0.5)',
+                        pointBorderColor: 'rgba(37, 116, 169, 1)',
+                        pointBackgroundColor: 'rgba(37, 116, 169, 1)'
                     },
                     {
                         label: 'Quaterly',
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(92, 151, 191, 0.5)',  
-                        borderColor: 'rgba(128, 128, 128, 1)'
+                        backgroundColor: 'rgba(92, 151, 191, 0.25)',  
+                        borderColor: 'rgba(92, 151, 191, 0.5)',
+                        pointBorderColor: 'rgba(92, 151, 191, 1)',
+                        pointBackgroundColor: 'rgba(92, 151, 191, 1)'
                     },
                     {
                         label: 'Monthly',
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(78, 205, 196, 0.2)', 
-                        borderColor: 'rgba(192, 192, 192, 1)'
+                        backgroundColor: 'rgba(78, 205, 196, 0.25)', 
+                        borderColor: 'rgba(78, 205, 196, 0.5)',
+                        pointBorderColor: 'rgba(78, 205, 196, 1)',
+                        pointBackgroundColor: 'rgba(78, 205, 196, 1)'
                     }]
                 },
                 options: {
@@ -10523,13 +10524,19 @@ if ( typeof define === 'function' && define.amd ) {
             compoundInterest:{
                 interestRate : 0,
                 investment : 0,
-                //periods : [5, 10, 20, 60],
                 peroids: {
                     year1: [1, 2, 4, 12],
                     year2: [2, 4, 8, 24],
                     year3: [3, 6, 12, 36],
                     year4: [4, 8, 16, 48],
                     year5: [5, 10, 20, 60]
+                },
+                labels:{
+                    year1: "1 Year",
+                    year2: "2 Years",
+                    year3: "3 Years",
+                    year4: "4 Years",
+                    year5: "5 Years"
                 },
                 timescale : {
                   year1: ''  
@@ -10544,23 +10551,18 @@ if ( typeof define === 'function' && define.amd ) {
                 }
             }
         };
-        this.init();
+        //this.init();
     }
     
-    Calculator.prototype.init = function() {
+    /*Calculator.prototype.init = function() {
         console.log("Init");
-    }
+    }*/
     
     Calculator.prototype.bindUIEvents = function () {
         var that = this;
         Object.keys(this.$inputs).forEach(function (keyMain) {
             
             Object.keys(that.$inputs[keyMain]).forEach(function (keySub) {
-                
-              //  if(keyMain == "menu"){
-                    // that.$inputs[keyMain][keySub].addEventListener('click', onMenuClick);
-                    //console.log("Listener added to: "+that.$inputs[keyMain][keySub].getAttribute('id'));
-             //   }
                 
                 if(keyMain == "conversions" || keyMain == "compoundInterest") {
                     // if (that.$inputs[keyMain][keySub].value.trim() !== '') {
@@ -10575,8 +10577,6 @@ if ( typeof define === 'function' && define.amd ) {
                     else if(keySub == "period"){
                         that.$inputs[keyMain][keySub].addEventListener('input', function(){onRangesliderChange(keyMain, keySub)});
                     }
-                    
-                    
                 }
             })
         })
@@ -10601,7 +10601,7 @@ if ( typeof define === 'function' && define.amd ) {
             }
             this.chart[keyMain].style = myCalculator.chart.style;
             //console.log("** whooop");
-        
+            this.$inputs.compoundInterest.periodLabel.innerHTML = this._model.compoundInterest.labels[currentPeriod];
             this.chart[keyMain].object.update();
             
         //})
@@ -10634,21 +10634,6 @@ if ( typeof define === 'function' && define.amd ) {
         //var goal = Math.round((Math.pow(interestRate, period) * investment));
         return output;
     }
-    
-    // function onMenuClick(evt) {
-    //     var clickedElement = evt.target.getAttribute('id');
-
-    //     if(myCalculator.sections.current != ''){
-    //         classie.remove(myCalculator.sections.current, 'show');
-    //         //myCalculator.chart.compoundInterest.object.clear();
-    //     }
-        
-    //     classie.add(myCalculator.sections[clickedElement], 'show');
-    //     classie.add(myCalculator.$outputs.wrapper, 'show');
-        
-    //     myCalculator.sections.current = myCalculator.sections[clickedElement];
-        
-    // }
     
     function onInputFocus(evt) {
         classie.add(evt.target.parentNode, 'input--filled');
@@ -10698,50 +10683,7 @@ if ( typeof define === 'function' && define.amd ) {
 
     function setupLineChart(element) {
         var canvas = element.chart.tag.getContext("2d");
-        var myChart = new Chart(canvas, element.chart.style);/*, {
-            type: 'line', 
-            data: {
-                labels: ["0", "6 months", "12 months", "18 months", "24 months", "30 months", "36 months"], 
-                datasets: [{
-                    label: 'Yearly', 
-                    data: [0, 0, 0, 0, 0, 0, 0],
-                    backgroundColor: ['rgba(54, 65, 84, 1)'], 
-                    borderColor: ['rgba(47, 79, 79, 1)'], 
-                    borderWidth: 1
-                },
-                {
-                    label: 'Semesterly',
-                    data: [0, 0, 0, 0, 0, 0, 0], 
-                    backgroundColor: ['rgba(37, 116, 169, 0.8)'],
-                    borderColor: ['rgba(119, 136, 153, 1)'],
-                    borderWidth: 1
-                },
-                {
-                    label: 'Quaterly',
-                    data: [0, 0, 0, 0, 0, 0, 0],
-                    backgroundColor: ['rgba(92, 151, 191, 0.5)'],  
-                    borderColor: ['rgba(128, 128, 128, 1)'],
-
-                    borderWidth: 1
-                },
-                {
-                    label: 'Monthly',
-                    data: [0, 0, 0, 0, 0, 0, 0],
-                    backgroundColor: ['rgba(78, 205, 196, 0.2)'], 
-                    borderColor: ['rgba(192, 192, 192, 1)'], 
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });*/
+        var myChart = new Chart(canvas, element.chart.style);
         return myChart;
     }
     
