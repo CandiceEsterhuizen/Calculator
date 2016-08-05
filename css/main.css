@@ -63,6 +63,17 @@ table {
     float: left;
     margin-left: 0;
     margin-right: 0; }
+  .grid#output .wrapper div {
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0; }
+    .grid#output .wrapper div span {
+      width: 100%;
+      float: left;
+      margin-left: 0;
+      margin-right: 0;
+      margin-left: 25.5814%; }
   @media all and (min-width: 34.375em) {
     .grid {
       max-width: 1080px;
@@ -96,7 +107,18 @@ table {
         margin-right: 1.53846%;
         margin-right: 16.92308%; }
       .grid h1 {
-        text-align: center; } }
+        text-align: center; }
+      .grid#output h3 {
+        width: 83.07692%;
+        float: left;
+        margin-right: 1.53846%;
+        margin-left: 16.92308%; }
+      .grid#output .wrapper {
+        width: 66.15385%;
+        float: left;
+        margin-right: 1.53846%;
+        margin-left: 16.92308%;
+        margin-right: 16.92308%; } }
   @media all and (min-width: 48.75em) {
     .grid {
       max-width: 1080px;
@@ -135,7 +157,18 @@ table {
         margin-left: 12.64368%;
         width: 87.35632%;
         float: left;
-        margin-right: 1.14943%; } }
+        margin-right: 1.14943%; }
+      .grid#output h3 {
+        width: 87.35632%;
+        float: left;
+        margin-right: 1.14943%;
+        margin-left: 12.64368%; }
+      .grid#output .wrapper {
+        width: 49.42529%;
+        float: left;
+        margin-right: 1.14943%;
+        margin-left: 25.28736%;
+        margin-right: 25.28736%; } }
   @media all and (min-width: 67.5em) {
     .grid {
       max-width: 1080px;
@@ -173,7 +206,18 @@ table {
         width: 66.41221%;
         float: left;
         margin-right: 0.76336%;
-        margin-right: 16.79389%; } }
+        margin-right: 16.79389%; }
+      .grid#output h3 {
+        width: 91.60305%;
+        float: left;
+        margin-right: 0.76336%;
+        margin-left: 8.39695%; }
+      .grid#output .wrapper {
+        width: 32.82443%;
+        float: left;
+        margin-right: 0.76336%;
+        margin-left: 33.58779%;
+        margin-right: 33.58779%; } }
 
 .input {
   position: relative;
@@ -2522,43 +2566,52 @@ header .spacer {
   position: absolute;
   bottom: 8px; }
 
-#output1 {
-  color: #34495E;
-  font-size: 3.3rem; }
+#output {
+  max-height: 0px;
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden; }
+  #output.show {
+    max-height: 1000px; }
+  #output .wrapper {
+    border: 1px solid #004c99;
+    display: inline-block; }
+    #output .wrapper div {
+      font-size: 2.0rem;
+      line-height: 2.2rem;
+      padding: 10px 0;
+      letter-spacing: 1px; }
+    #output .wrapper div:nth-child(odd) {
+      background-color: rgba(0, 76, 153, 0.1); }
 
-#output2 {
-  color: #2574A9;
-  font-size: 2.6rem; }
-
-#output3 {
-  color: #89C4F4;
-  font-size: 2.5rem; }
-
-#output4 {
-  color: #A2DED0;
-  font-size: 2.2rem; }
+#si-period {
+  margin-top: 30px; }
 
 #si-period-label {
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 20px; }
+
+h1, h3 {
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 15px; }
 
 h1 {
   font-family: "Alex Brush", cursive;
-  font-size: 5.4rem;
-  line-height: 5.4rem;
-  margin-bottom: 20px;
-  margin-top: 15px;
   color: #fff;
-  text-align: left; }
+  font-size: 5.4rem;
+  line-height: 5.6rem; }
+
+h3 {
+  font-size: 3.4rem;
+  line-height: 3.6rem; }
 
 p {
-  padding: 20px 0; }
+  padding: 20px 0;
+  text-align: center; }
 
 a {
   text-decoration: none;
   color: #2C3E50; }
-
-.show {
-  max-height: 1000px; }
 
 *:focus {
   outline: none; }

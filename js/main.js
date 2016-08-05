@@ -10611,10 +10611,10 @@ if ( typeof define === 'function' && define.amd ) {
         //console.log(index+" "+value);
         
         switch(index){
-            case 0: writeOutput('output1', 'Yearly calculation:', value); break;
-            case 1: writeOutput('output2', 'Semesterly calculation:', value); break;
-            case 2: writeOutput('output3', 'Quaterly calculation:', value); break;
-            case 3: writeOutput('output4', 'Monthly calculation:', value); break;
+            case 0: writeOutput('output1', 'Yearly:', value); break;
+            case 1: writeOutput('output2', 'Semesterly:', value); break;
+            case 2: writeOutput('output3', 'Quaterly:', value); break;
+            case 3: writeOutput('output4', 'Monthly:', value); break;
         }
     }
     
@@ -10635,14 +10635,26 @@ if ( typeof define === 'function' && define.amd ) {
         return output;
     }
     
+    function checkInput(){
+        if(myCalculator.$inputs.compoundInterest.interestRate.value !== '' && myCalculator.$inputs.compoundInterest.investment.value !== ''){
+            classie.add(myCalculator.$outputs.wrapper, 'show');
+        }
+        else
+            classie.remove(myCalculator.$outputs.wrapper, 'show');
+    }
+    
     function onInputFocus(evt) {
         classie.add(evt.target.parentNode, 'input--filled');
+        
+        //checkInput();
     }
 
     function onInputBlur(evt) {
         if (evt.target.value.trim() === '') {
             classie.remove(evt.target.parentNode, 'input--filled');
         }
+        
+        //checkInput();
     }
 
     function onRangesliderChange(main, sub) {
@@ -10679,6 +10691,7 @@ if ( typeof define === 'function' && define.amd ) {
         myCalculator._model[main][sub] = value;
         
         myCalculator.updateOutputs(main);
+        checkInput();
     }
 
     function setupLineChart(element) {
